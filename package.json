@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/app.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "fs": "git add . && git commit -m 'another commit' && git push"
   },
   "dependencies": {
     "express": "^4.17.1",

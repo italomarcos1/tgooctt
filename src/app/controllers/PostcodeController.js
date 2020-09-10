@@ -1,17 +1,18 @@
 import Postcode from '../models/Postcode';
 
 class PostcodeController {
-  async index(req, res) {
+  async index(request, response) {
     console.log('one');
-    const { postcode } = req.params;
+    const { postcode } = request.params;
     console.log('two');
     console.log(postcode);
 
     const location = await Postcode.findByPk(postcode);
+    console.log(location);
 
     console.log('fuck');
 
-    return res.json(location);
+    return response.json(location);
   }
 }
 
