@@ -1,7 +1,7 @@
-import express from 'express';
-import routes from './routes';
+const express = require('express');
+const routes = require('./routes');
 
-import './database';
+require('./database');
 
 const server = express();
 

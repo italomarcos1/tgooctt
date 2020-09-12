@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import PostcodeController from './app/controllers/PostcodeController';
+const { Router } = require('express');
+const PostcodeController = require('./app/controllers/PostcodeController');
 
 const routes = new Router();
 
-routes.get('/postcodes/:postcode', PostcodeController.index);
+routes.get('/postcodes/:code', PostcodeController.index);
 
-export default routes;
+module.exports = routes;

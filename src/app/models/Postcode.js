@@ -1,4 +1,5 @@
-import Sequelize, { Model } from 'sequelize';
+const Sequelize = require('sequelize');
+const { Model } = require('sequelize');
 
 class Postcode extends Model {
   static init(sequelize) {
@@ -31,4 +32,4 @@ class Postcode extends Model {
   }
 }
 
-export default Postcode;
+module.exports = Postcode;

@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/app.js",
+    "dev": "node --harmony src/app.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
     "start": "node dist/app.js",
     "fs": "git add . && git commit -m 'another commit' && git push"

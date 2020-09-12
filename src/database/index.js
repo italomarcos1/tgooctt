@@ -1,8 +1,8 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
-import Postcode from '../app/models/Postcode';
+const Postcode = require('../app/models/Postcode');
 
-import databaseConfig from '../config/database';
+const databaseConfig = require('../config/database');
 
 const models = [Postcode];
 
@@ -18,4 +18,4 @@ class Database {
   }
 }
 
-export default new Database();
+module.exports = new Database();
