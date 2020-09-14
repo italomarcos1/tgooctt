@@ -22,12 +22,12 @@ class PostcodeController {
     if (filteredLocations.length === 1) {
       console.log('first case');
       const result = await SingleAddress.execute(filteredLocations);
-      return response.json({ address: result, isSingle: true });
+      return response.json({ address: [result] });
     }
     console.log('second case');
 
     const result = await MultipleAddress.execute(filteredLocations);
-    return response.json({ address: result, isSingle: false });
+    return response.json({ address: result });
 
     // single address = retorna o data_values
     // multiple address = retorna o array com data_values
