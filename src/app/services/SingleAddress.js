@@ -15,7 +15,7 @@ class SingleAddress {
 
     console.log(filteredAddress);
 
-    const copyFinalAddress = filteredAddress;
+    const copyFinalAddress = { ...filteredAddress };
 
     delete copyFinalAddress.id;
     delete copyFinalAddress.cod_distrito;
@@ -26,6 +26,7 @@ class SingleAddress {
     delete copyFinalAddress.num_cod_postal;
     delete copyFinalAddress.ext_cod_postal;
     delete copyFinalAddress.desig_postal;
+    delete copyFinalAddress.cliente;
 
     const result = Object.values(copyFinalAddress).join(' ');
 
@@ -34,17 +35,29 @@ class SingleAddress {
     // {{ url }}/3750-144
 
     const {
+      id,
+      cliente,
       cod_distrito,
       cod_concelho,
       cod_localidade,
       cod_arteria,
       nome_localidade,
-      num_cod_postal,
-      ext_cod_postal,
       desig_postal,
     } = userData;
 
-    const finalAddress = `${result}, ${nome_localidade} - ${desig_postal}`;
+    let fullAddress = `${result}, ${nome_localidade} - ${desig_postal}`; // eslint-disable-line
+    if (cliente) {
+      fullAddress = `${cliente} - ${fullAddress}`;
+    }
+
+    const finalAddress = {
+      id,
+      full_address: fullAddress,
+      cod_distrito,
+      cod_concelho,
+      cod_localidade,
+      cod_arteria,
+    };
 
     return finalAddress;
   }

@@ -39,7 +39,7 @@ class MultipleAddress {
 
       finalAddressResult.push({
         id: e.id,
-        street_name: result,
+        full_address: result,
         cod_distrito: e.cod_distrito,
         cod_concelho: e.cod_concelho,
         cod_localidade: e.cod_localidade,
