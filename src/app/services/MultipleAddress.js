@@ -40,6 +40,8 @@ class MultipleAddress {
       finalAddressResult.push({
         id: e.id,
         full_address: result,
+        nome_localidade: e.nome_localidade,
+        desig_postal: e.desig_postal,
         cod_distrito: e.cod_distrito,
         cod_concelho: e.cod_concelho,
         cod_localidade: e.cod_localidade,

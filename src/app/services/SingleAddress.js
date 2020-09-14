@@ -53,6 +53,8 @@ class SingleAddress {
     const finalAddress = {
       id,
       full_address: fullAddress,
+      nome_localidade,
+      desig_postal,
       cod_distrito,
       cod_concelho,
       cod_localidade,
