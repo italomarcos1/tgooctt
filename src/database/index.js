@@ -1,7 +1,5 @@
 const Sequelize = require('sequelize');
-
 const Postcode = require('../app/models/Postcode');
-
 const databaseConfig = require('../config/database');
 
 const models = [Postcode];

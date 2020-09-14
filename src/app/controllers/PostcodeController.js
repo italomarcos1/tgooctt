@@ -1,4 +1,6 @@
 const Postcode = require('../models/Postcode');
+const SingleAddress = require('../services/SingleAddress');
+const MultipleAddress = require('../services/MultipleAddress');
 
 class PostcodeController {
   async index(request, response) {
@@ -6,54 +8,29 @@ class PostcodeController {
 
     const [postCode, extPostCode] = code.split('-');
 
-    const { dataValues } = await Postcode.findOne({
+    const location = await Postcode.findAll({
       where: { num_cod_postal: postCode, ext_cod_postal: extPostCode },
     });
 
-    delete dataValues.createdAt;
-    delete dataValues.updatedAt;
+    // console.log(location);
 
-    const addressObject = Object.entries(dataValues);
+    const values = Object.values(location);
 
-    const filteredAddressObject = addressObject.filter(f => f[1] !== null);
+    const filteredLocations = values.map(v => v.dataValues);
+    // console.log(filteredLocations);
 
-    const filteredAddress = Object.fromEntries(filteredAddressObject);
+    if (filteredLocations.length === 1) {
+      console.log('first case');
+      const result = await SingleAddress.execute(filteredLocations);
+      return response.json({ address: result, isSingle: true });
+    }
+    console.log('second case');
 
-    const copyFinalAddress = filteredAddress;
+    const result = await MultipleAddress.execute(filteredLocations);
+    return response.json({ address: result, isSingle: false });
 
-    delete copyFinalAddress.id;
-    delete copyFinalAddress.cod_distrito;
-    delete copyFinalAddress.cod_concelho;
-    delete copyFinalAddress.cod_localidade;
-    delete copyFinalAddress.cod_arteria;
-    delete copyFinalAddress.nome_localidade;
-    delete copyFinalAddress.num_cod_postal;
-    delete copyFinalAddress.ext_cod_postal;
-    delete copyFinalAddress.desig_postal;
-
-    const result = Object.values(copyFinalAddress).join(' ');
-
-    console.log(result);
-
-    // {{ url }}/2770-071
-    // {{ url }}/3750-107
-    // {{ url }}/3750-144
-
-    console.log(filteredAddress);
-    const {
-      cod_distrito,
-      cod_concelho,
-      cod_localidade,
-      cod_arteria,
-      nome_localidade,
-      num_cod_postal,
-      ext_cod_postal,
-      desig_postal,
-    } = dataValues;
-
-    return response.json({
-      address: `${result}, ${nome_localidade} - ${desig_postal}`,
-    });
+    // single address = retorna o data_values
+    // multiple address = retorna o array com data_values
   }
 }
 
