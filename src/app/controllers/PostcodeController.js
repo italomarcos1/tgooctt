@@ -8,6 +8,10 @@ class PostcodeController {
 
     const [postCode, extPostCode] = code.split('-');
 
+    if (!Number(postCode) || !Number(extPostCode)) {
+      return response.status(400).json({ error: 'Invalid input' });
+    }
+
     const location = await Postcode.findAll({
       where: { num_cod_postal: postCode, ext_cod_postal: extPostCode },
     });
