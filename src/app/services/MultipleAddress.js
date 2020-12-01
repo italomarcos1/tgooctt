@@ -4,12 +4,12 @@ class MultipleAddress {
 
     const a = data.map(e => Object.entries(e));
 
-    // console.log(a);
-
     const filteredAddressObjects = a.map(e => e.filter(f => f[1] !== null));
 
     // console.log(filteredAddressObjects);
 
+    // o 'fromEntries' cria um objeto a partir do array de arrays, o reverso do passo anterior.
+    // fazemos isso após filtrar os campos null
     const filteredAddress = filteredAddressObjects.map(e =>
       Object.fromEntries(e)
     );
@@ -17,6 +17,8 @@ class MultipleAddress {
     console.log(filteredAddress);
 
     const finalAddressResult = [];
+    // iterando por cada campo do array, formatando o nome da rua e dando push.
+    // assim retorna vários endereços
     filteredAddress.forEach(e => {
       const f = { ...e };
 

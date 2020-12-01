@@ -1,6 +1,6 @@
 const express = require('express');
-const routes = require('./routes');
 const cors = require('cors');
+const routes = require('./routes');
 
 require('./database');
 
@@ -11,5 +11,5 @@ server.use(express.json());
 server.use(routes);
 
 server.listen(3333, () => {
-  console.log('Rodando');
+  console.log('Rodando na porta 3333');
 });
